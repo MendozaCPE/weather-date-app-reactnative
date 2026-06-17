@@ -50,7 +50,6 @@ export default function HomeScreen() {
     return `${hoursStr}:${minutes}:${seconds} ${ampm}`;
   };
 
-  // Format date as "Wednesday, June 17, 2026"
   const formatDate = (date: Date) => {
     const days = [
       "Sunday",
@@ -152,6 +151,10 @@ export default function HomeScreen() {
 
   useEffect(() => {
     fetchWeather();
+    const weatherTimer = setInterval(() => {
+      fetchWeather();
+    }, 30000); // 30 seconds
+    return () => clearInterval(weatherTimer);
   }, []);
 
   return (
